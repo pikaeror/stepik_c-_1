@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include "clockk.h"
 
 int sum(int value, int sum_v=0) {
     if(std::abs(value) < 1) {
@@ -28,37 +29,6 @@ std::uint64_t Cost_by_cake(std::uint64_t rub, std::uint64_t kop, std::uint64_t c
     return k + d;
 }
 
-class clockk{
-public:
-    int hour;
-    int minutes;
-    int seconds;
-    clockk() {
-    }
-    clockk(int hour, int minutes, int seconds) {
-        this->hour = hour;
-        this->minutes = minutes;
-        this->seconds = seconds;
-    }
-    int operator-(clockk& rv) {
-        return this->get_seconds() - rv.get_seconds();
-    }
-    int get_seconds() {
-        return hour * 3600 + minutes * 60 + seconds;
-    }
-    void culculate(int sec) {
-        float pre_hour = floor(float(sec) / 3600.);
-        hour = int(pre_hour) % 24;
-        seconds = sec % 60;
-        minutes = ((sec - seconds) / 60) % 60;
-    }
-    void print() {
-        std::cout<<hour<<':';
-        std::cout<<std::setfill('0')<<std::setw(2)<<minutes;
-        std::cout<<std::setw(1)<<':'<<std::setw(2)<<seconds;
-    }
-};
-
 void Print_coast(std::uint64_t coast) {
     std::uint64_t f = coast / 100;
     std::uint64_t rub = floor(f);
@@ -72,11 +42,13 @@ int main(int argc, char *argv[])
     std::cin>>h;
     std::cin>>m;
     std::cin>>s;
-    clockk* cl_1 = new clockk(h, m, s);
+    clockk cl_1 = clockk(h, m, s);
     std::cin>>h;
     std::cin>>m;
     std::cin>>s;
-    clockk* cl_2 = new clockk(h, m, s);
-    std::cout<<cl_2->operator-(*cl_1);
+    clockk cl_2 = clockk(h, m, s);
+    clockk cl_3;
+    cl_3 = cl_2 - cl_1;
+    std::cout<<cl_3.get_full_seconds();
     return a.exec();
 }
