@@ -35,6 +35,17 @@ public:
     int seconds;
     clockk() {
     }
+    clockk(int hour, int minutes, int seconds) {
+        this->hour = hour;
+        this->minutes = minutes;
+        this->seconds = seconds;
+    }
+    int operator-(clockk& rv) {
+        return this->get_seconds() - rv.get_seconds();
+    }
+    int get_seconds() {
+        return hour * 3600 + minutes * 60 + seconds;
+    }
     void culculate(int sec) {
         float pre_hour = floor(float(sec) / 3600.);
         hour = int(pre_hour) % 24;
@@ -57,10 +68,15 @@ void Print_coast(std::uint64_t coast) {
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    int value;
-    std::cin>>value;
-    clockk* cl = new clockk();
-    cl->culculate(value);
-    cl->print();
+    int h, m, s;
+    std::cin>>h;
+    std::cin>>m;
+    std::cin>>s;
+    clockk* cl_1 = new clockk(h, m, s);
+    std::cin>>h;
+    std::cin>>m;
+    std::cin>>s;
+    clockk* cl_2 = new clockk(h, m, s);
+    std::cout<<cl_2->operator-(*cl_1);
     return a.exec();
 }
