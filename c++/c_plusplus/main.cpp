@@ -35,20 +35,33 @@ void Print_coast(std::uint64_t coast) {
     std::cout<<rub<<' '<<coast % 100;
 }
 
+int time_by_road(float_t height, float_t up_in_day, float_t down_by_night) {
+    float_t time = std::ceil((height - down_by_night) / (up_in_day - down_by_night));
+    return time < 1 ? 1 : int(time);
+}
+
+int_least64_t Point_on_road(int_least64_t speed, int_least64_t time) {
+    int_least64_t len = 109;
+    return ((time * speed) % len + len) % len;
+}
+
+int_least16_t simmetrick_value(int_least16_t value) {
+    if(value == 0) return 1;
+    std::string list = std::to_string(value);
+    while (list.size() < 4) {
+        list = '0' + list;
+    }
+    for(int i = 0; i < list.size() / 2; i++) {
+        if(list[i] != list[list.size() - 1 - i]) return 0;
+    }
+    return 1;
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    int h, m, s;
-    std::cin>>h;
-    std::cin>>m;
-    std::cin>>s;
-    clockk cl_1 = clockk(h, m, s);
-    std::cin>>h;
-    std::cin>>m;
-    std::cin>>s;
-    clockk cl_2 = clockk(h, m, s);
-    clockk cl_3;
-    cl_3 = cl_2 - cl_1;
-    std::cout<<cl_3.get_full_seconds();
+    int_least16_t value;
+    std::cin>>value;
+    std::cout<<simmetrick_value(value);
     return a.exec();
 }
