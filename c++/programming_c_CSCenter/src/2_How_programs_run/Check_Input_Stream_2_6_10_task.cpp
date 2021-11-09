@@ -1,4 +1,5 @@
 #include "Check_Input_Stream_2_6_10_task.h"
+#include <vector>
 
 Check_Input_Stream_2_6_10_task::Check_Input_Stream_2_6_10_task()
 {
@@ -8,32 +9,45 @@ Check_Input_Stream_2_6_10_task::Check_Input_Stream_2_6_10_task()
 char *Check_Input_Stream_2_6_10_task::getline(size_t start_buffer_size)
 {
     char time_value;
-    char *output_values = new char[start_buffer_size];
-    std::cin.get(time_value);
+    char *output_value = new char[start_buffer_size];
+    size_t lens = start_buffer_size;
+    //std::cin.get(time_value);
     size_t counter = 0;
-    while (!(time_value == '\n' || time_value == std::cin.eof())) {
-        if(counter > size_t(std::strlen(output_values)) - 2)
-            output_values = resize(output_values,
-                                   std::strlen (output_values),
-                                   std::strlen (output_values) + start_buffer_size);
-        *(output_values + counter) = time_value;
+    while (!(!std::cin.get(time_value) || time_value == '\n' || time_value == '\0')) {
+        if(counter > lens - 1) {
+            output_value = resize(output_value, lens, lens + start_buffer_size);
+            //lens += start_buffer_size;
+        }
+        *(output_value + counter) = time_value;
         counter++;
-        std::cin.get(time_value);
+        //std::cin.get(time_value);
     }
-    *(output_values + counter) = '\0';
-    return output_values;
+    *(output_value + counter) = '\0';
+    return output_value;
 }
 
-char* Check_Input_Stream_2_6_10_task::resize(char *str, unsigned size, unsigned new_size)
+char *Check_Input_Stream_2_6_10_task::new_init(char *str, size_t lens)
+{
+    char *output = new char[lens + 1];
+    size_t count = 0;
+    while (str) {
+        *(output + count) = *str++;
+        count++;
+        if(*str == '\0')
+            break;
+    }
+    str -= count;
+    free(str);
+//    str = 0;
+    return output;
+}
+
+char* Check_Input_Stream_2_6_10_task::resize(char *str, size_t &size, size_t new_size)
 {
     char *out_put_values = new char[new_size];
-    for(size_t i = 0; i < (size < new_size ? size : new_size); i++ ) {
-        *(out_put_values + i) = *(str + i);
-    }
+    std::strcpy(out_put_values, str);
     delete [] str;
-    //str = 0;
-//    str = new char[new_size];
-//    str = out_put_values;
-//    delete []out_put_values;
+    size = new_size;
+    //    str = 0;
     return out_put_values;
 }

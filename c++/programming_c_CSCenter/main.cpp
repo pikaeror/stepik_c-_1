@@ -1,12 +1,12 @@
 #include <iostream>
-#include "src/2_How_programs_run/Check_Input_Stream_2_6_10_task.h"
+#include "src/2_How_programs_run/Transpose_Matrix_2_7_8_task.h"
 
 using namespace std;
 
 int main()
 {
-    Check_Input_Stream_2_6_10_task t = Check_Input_Stream_2_6_10_task();
-    t.getline();
+    Transpose_Matrix_2_7_8_task t = Transpose_Matrix_2_7_8_task();
+    t.tested();
 //    cout << t.strstr("1234567890", "") << endl;
     return 0;
 }
