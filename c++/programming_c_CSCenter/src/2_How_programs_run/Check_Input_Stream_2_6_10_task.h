@@ -9,7 +9,7 @@ public:
 
     char *getline(size_t start_buffer_size = 32);
 
-    char *resize(char *str,
+    char* resize(char *str,
                  unsigned size,
                  unsigned new_size);
 };
