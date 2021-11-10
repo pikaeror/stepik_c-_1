@@ -27,24 +27,26 @@ String::~String()
 
 void String::append(String &other)
 {
-    size_t count = size + 1;
-    size_t in = other.size;
+    size_t count = size;
+    size_t in = other.size - 1;
     resize(other.size);
-    while (count <= size + 1) {
-        *(this->str + size) = (*(other.str + in));
-        size--;
+    size_t newlen = this->size;
+    while (count < newlen--) {
+        *(this->str + newlen) = (*(other.str + in));
         in--;
     }
+    (*(this->str + this->size)) = '\0';
     this->size = std::strlen(this->str);
 }
 
 void String::resize(const size_t &size)
 {
     char *str = new char[size + this->size + 1];
-    for(size_t i = 0; i < this->size; i++) {
-        (*(str + i)) = (*(this->str + i));
-    }
-    delete [] this->str;
-    this->str = str;
-    this->size += size;
+        for(size_t i = 0; i <= this->size; i++) {
+            (*(str + i)) = (*(this->str + i));
+        }
+        (*(str + size + this->size)) = '\0';
+        delete [] this->str;
+        this->str = str;
+        this->size += size;
 }
