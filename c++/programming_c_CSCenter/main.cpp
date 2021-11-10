@@ -1,12 +1,12 @@
 #include <iostream>
-#include "src/3_Structures_Classes/Constructor_String_3_3_9_task.h"
+#include "src/3_Structures_Classes/Access_Modifiers_3_5_7_task.h"
 
 using namespace std;
 
 int main()
 {
-    String t = "Transpose_Matrix_2_7_8_task()";
-    t.append(t);
+    Access_Modifiers_3_5_7_task t = Access_Modifiers_3_5_7_task();
+    t.test();
 //    cout << t.strstr("1234567890", "") << endl;
     return 0;
 }
