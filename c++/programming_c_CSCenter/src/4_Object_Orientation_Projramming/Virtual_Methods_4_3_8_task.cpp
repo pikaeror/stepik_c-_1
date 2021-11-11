@@ -16,7 +16,18 @@ void Virtual_Methods_4_3_8_task::test()
 
     // тут освобождаются *все* выделенные объекты
     // (например, sube будет правым операндом expr, поэтому его удалять не нужно)
+
+    Number *r = new Number(sube->evaluate());
+
+    check_equals(r,
+                 sube);
     delete expr;
+}
+
+bool Virtual_Methods_4_3_8_task::check_equals(const Expression *left,
+                                              const Expression *right)
+{
+    return *(char*)left ==  *(char*)right;
 }
 
 Number BinaryOperation::calculate() const

@@ -15,7 +15,8 @@ SOURCES += \
         src/2_How_programs_run/steck_2_2_10_task.cpp \
         src/3_Structures_Classes/Access_Modifiers_3_5_7_task.cpp \
         src/3_Structures_Classes/Constructor_String_3_3_9_task.cpp \
-        src/4_Object_Orientation_Projramming/Virtual_Methods_4_3_8_task.cpp
+        src/4_Object_Orientation_Projramming/Virtual_Methods_4_3_8_task.cpp \
+        src/5_Additional_Features/Method_Override_Rules_5_2_3_task.cpp
 
 HEADERS += \
     src/2_How_programs_run/Check_Input_Stream_2_6_10_task.h \
@@ -28,4 +29,5 @@ HEADERS += \
     src/2_How_programs_run/steck_2_2_10_task.h \
     src/3_Structures_Classes/Access_Modifiers_3_5_7_task.h \
     src/3_Structures_Classes/Constructor_String_3_3_9_task.h \
-    src/4_Object_Orientation_Projramming/Virtual_Methods_4_3_8_task.h
+    src/4_Object_Orientation_Projramming/Virtual_Methods_4_3_8_task.h \
+    src/5_Additional_Features/Method_Override_Rules_5_2_3_task.h

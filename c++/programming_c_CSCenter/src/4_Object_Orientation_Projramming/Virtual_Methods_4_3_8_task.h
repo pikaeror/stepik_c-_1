@@ -50,6 +50,8 @@ public:
     Virtual_Methods_4_3_8_task();
 
     void test();
+
+    bool check_equals(Expression const *left, Expression const *right);
 };
 
 #endif // VIRTUAL_METHODS_4_3_8_TASK_H
