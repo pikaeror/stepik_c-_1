@@ -29,6 +29,7 @@ Method_Override_Rules_5_2_3_task::Method_Override_Rules_5_2_3_task()
 void Method_Override_Rules_5_2_3_task::test()
 {
     String r("12345678");
+    r[4][4];
 //    r.
 //    Rational k(5, 10);
 //    double j = k;
