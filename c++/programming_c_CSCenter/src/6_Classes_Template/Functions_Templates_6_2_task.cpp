@@ -12,5 +12,12 @@ void Functions_Templates_6_2_task::test()
     double doubles[] = {3.14};
     auto d = array_size(ints); // вернет 4
     d = array_size(doubles); // вернет 1
-    d = array_size(iptr); // тут должна произойти ошибка компиляции
+    //d = array_size(iptr); // тут должна произойти ошибка компиляции
+
+    struct Dummy { };
+    typedef int type;
+
+    std::cout << SameType<int, int>::value << std::endl; // выведет 1, т. е. true
+    std::cout << SameType<int, type>::value << std::endl; // 1, type == int
+    std::cout << SameType<int, int&>::value << std::endl; // 0, int и ссылка на int - различные типы
 }

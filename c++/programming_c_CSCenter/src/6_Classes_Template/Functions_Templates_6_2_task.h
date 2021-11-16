@@ -57,6 +57,16 @@ size_t array_size(T (&array)[k]) {
     return sizeof (array) / sizeof (T);
 }
 
+template<typename T, typename U>
+class SameType {
+public:
+    static const bool value = false;
+};
+template<typename T>
+class SameType<T, T> {
+public:
+    static const bool value = true;
+};
 
 
 class Functions_Templates_6_2_task

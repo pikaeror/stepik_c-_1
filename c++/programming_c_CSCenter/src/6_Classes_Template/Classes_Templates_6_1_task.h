@@ -56,6 +56,21 @@ private:
     char *m_array;
 };
 
+struct ICloneable
+{
+    virtual ICloneable* clone() const = 0;
+    virtual ~ICloneable() { }
+};
+
+template <typename T>
+struct ValueHolder : ICloneable {
+    explicit ValueHolder(const T &value) : data_(value) {}
+
+    ValueHolder* clone() const { return new ValueHolder(*this); };
+
+    T data_;
+}; // дальше самостоятельно
+
 class Classes_Templates_6_1_task
 {
 public:
