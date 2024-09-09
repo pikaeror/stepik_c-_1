@@ -1,11 +1,12 @@
 #include <iostream>
 #include "src/6_Classes_Template/Functions_Templates_6_2_task.h"
+#include "src/5_Additional_Features/Method_Override_Rules_5_2_3_task.h"
 
 using namespace std;
 
 int main()
 {
-    Functions_Templates_6_2_task t = Functions_Templates_6_2_task();
+    Method_Override_Rules_5_2_3_task t = Method_Override_Rules_5_2_3_task();
 
     t.test();
 //    short sh = 10;
