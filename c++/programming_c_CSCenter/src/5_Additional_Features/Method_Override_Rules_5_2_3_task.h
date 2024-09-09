@@ -1,6 +1,7 @@
 #ifndef METHOD_OVERRIDE_RULES_5_2_3_TASK_H
 #define METHOD_OVERRIDE_RULES_5_2_3_TASK_H
 //#include <string>
+#include <cstdio>
 
 struct Rational
 {
@@ -121,27 +122,101 @@ struct String {
     struct SubString {
         SubString(String &p, size_t start_index) : parent(p),
             first_index(start_index) {}
-        String& operator[](size_t j) const { return parent.get(first_index, j); }
+        String operator[](size_t j) const { return parent.get(first_index, j); }
     private:
         String& parent;
         size_t first_index;
     };
 
     SubString operator[](size_t i) { return SubString(*this, i); }
-//    String& operator[](size_t i) { return this->get(i, size); }
+   // String& operator[](size_t i) { return this->get(i, size); }
 
-    String& get(size_t i, size_t j) {
-        char *ptr = new char[j - i];
+    String get(size_t i, size_t j) {
+        char *ptr = new char[j - i + 1];
         size_t k = 0;
         for(; i < j; i++, k++)
             (*(ptr + k)) = (*(this->str + i));
         (*(ptr + k)) = '\0';
+        return String(ptr);
         delete [] this->str;
         this->str = ptr;
         this->size = k;
 //        delete [] ptr;
         return *this;
     }
+
+    size_t size;
+    char *str;
+};
+
+/***
+ * В этой задаче вам требуется реализовать оператор [] для уже известного вам класса String.
+ * Однако на этот раз оператор должен реализовывать нестандартное поведение: оператор нужно реализовать таким образом,
+ * чтобы для объекта str класса String можно было писать str[i][j] и это выражение возвращало
+ * подстроку начинающуюся в позиции i (считая с 0) и заканчивающуюся в позиции j (не включая).
+ *
+ * Например:
+ *
+ * String const hello("hello");
+ * String const hell = hello[0][4]; // теперь в hell хранится подстрока "hell"
+ * String const ell  = hello[1][4]; // теперь в ell хранится подстрока "ell"
+ *
+ *
+ * Обратите внимание, что i может равняться j, в этом случае результатом должна быть пустая строка.
+ * Гарантируется, что i никогда не будет больше j, и они не будут выходить за пределы длины строки.
+ *
+ * Требования к реализации: При выполнении задания вы можете создавать любые методы/конструкторы или даже структуры/классы, если они вам нужны.
+ * Реализовывать методы, которые уже объявленны в шаблоне, не нужно  они уже реализованы.
+ * При выполнении задания не вводите и не выводите что-либо. Реализовывать функцию main не нужно.
+***/
+
+struct SString {
+    SString(const char *str = "");
+    SString(size_t n, char c);
+    ~SString();
+
+    SString(const SString &other) : size(other.size),
+        str(new char[size + 1]) {
+        for(size_t i = 0; i <= size; i++)
+            (*(str + i)) = (*(other.str + i));
+    }
+
+    SString &operator=(const SString &other);
+
+    void append(const SString &other);
+
+    struct SubSString {
+        const SString *parent;
+        size_t start_index;
+
+        SubSString(const SString *parrent, size_t index) : parent(parrent), start_index(index) {}
+
+        SString operator[](size_t index) const {
+            if(index == start_index) {
+                return *(new SString());
+            }
+            char *tmp = new char[index - start_index + 1];
+            for(size_t i = start_index; i < index; i++) {
+                *(tmp + i - start_index) = *(parent->str + i);
+            }
+            (*(tmp + index - start_index)) = '\0';
+            SString output(tmp);
+            delete [] tmp;
+            return output;
+        }
+    };
+
+    // struct SubSString {
+    //     SubSString(const char *str = "", size_t index=0) : parrent(str), start_index(index) {}
+    //     //~SubSString() { delete [] parrent; }
+
+    //     const SString &operator [](size_t last) const;
+
+    //     const char *parrent;
+    //     size_t start_index;
+    // };
+
+    SubSString operator[](size_t index) const { return SubSString(this, index); }
 
     size_t size;
     char *str;

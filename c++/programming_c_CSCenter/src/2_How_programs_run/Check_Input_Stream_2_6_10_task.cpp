@@ -1,5 +1,6 @@
 #include "Check_Input_Stream_2_6_10_task.h"
-#include <vector>
+#include <cstdio>
+#include <cstring>
 
 Check_Input_Stream_2_6_10_task::Check_Input_Stream_2_6_10_task()
 {

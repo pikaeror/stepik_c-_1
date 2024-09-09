@@ -1,4 +1,5 @@
 #include "Steck_Resize_2_6_9_task.h"
+#include <cstdio>
 
 Steck_Resize_2_6_9_task::Steck_Resize_2_6_9_task()
 {
